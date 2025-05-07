@@ -1,0 +1,1030 @@
+{
+	"info": {
+		"_postman_id": "85f1b700-4917-47fb-805a-ba1eb4298f23",
+		"name": "Cortex Cloud APIs",
+		"description": "Postman collection for Cortex Cloud APIs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8937986",
+		"_collection_link": "https://grey-spaceship-952579.postman.co/workspace/Cortex-Cloud~114db860-c57c-4d71-939a-fcab2551870f/collection/8937986-85f1b700-4917-47fb-805a-ba1eb4298f23?action=share&source=collection_link&creator=8937986"
+	},
+	"item": [
+		{
+			"name": "Cloud Onboarding Public APIs",
+			"item": [
+				{
+					"name": "Cloud accounts",
+					"item": [
+						{
+							"name": "Enable or disable cloud accounts",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"account-1\",\n      \"account-2\"\n    ],\n    \"instance_id\": \"instance-1\",\n    \"enable\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/enable_disable_account",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"enable_disable_account"
+									]
+								},
+								"description": "Enable or disable the specified cloud accounts.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get accounts in the specified integration instances",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance_id\",\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"STATUS\",\n          \"ORDER\": \"DESC\"\n        }\n      ],\n      \"paging\": {\n        \"from\": 0,\n        \"to\": 50\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"STATUS\",\n            \"SEARCH_TYPE\": \"EQ\",\n            \"SEARCH_VALUE\": \"ACTIVE\"\n          }\n        ]\n      }\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/get_accounts",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"get_accounts"
+									]
+								},
+								"description": "List all of the accounts and their details for all or filtered integration instances.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all approved Azure tenants",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/get_azure_approved_tenants",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"get_azure_approved_tenants"
+									]
+								},
+								"description": "In order to onboard an Azure tenant to Cortex, Cortex must first be added as an approved application on the tenant. Get a list of all the Azure tenants that are already approved for onboarding to Cortex.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get available regions for a CSP",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"AWS\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/list_regions",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"list_regions"
+									]
+								},
+								"description": "Get a list of all available regions for the specified cloud service provider.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing cloud accounts"
+				},
+				{
+					"name": "Cloud integration instances",
+					"item": [
+						{
+							"name": "Create a cloud onboarding integration template",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"scope\": \"ORGANIZATION\",\n    \"scan_mode\": \"MANAGED\",\n    \"cloud_provider\": \"AWS\",\n    \"instance_name\": \"My AWS Instance\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"environment\",\n        \"value\": \"production\"\n      }\n    ],\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": true\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"account_ids\": [\n          \"123456789012\"\n        ]\n      },\n      \"regions\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"regions\": [\n          \"us-east-1\",\n          \"us-west-2\"\n        ]\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": true,\n      \"data_security_posture_management\": true,\n      \"registry_scanning\": true,\n      \"registry_scanning_options\": {\n        \"type\": \"ECR\"\n      }\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/create_instance_template",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"create_instance_template"
+									]
+								},
+								"description": "Create a template to facilitate the seamless setup of CSP data in Cortex. Define the scope and specify the scan mode. For full control of the setup, you can use the advanced settings. Based on the onboarding settings, Cortex generates an authentication template to establish trust to the CSP and grant permissions to Cortex. The API returns a link to download the template from the Cortex tenant.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete the specified integration instances",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"instance-1\",\n      \"instance-2\"\n    ]\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/delete_instance",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"delete_instance"
+									]
+								},
+								"description": "Delete the specified integration instances.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit the specified integration instance template",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance-1\",\n    \"scan_env_id\": \"env-1\",\n    \"instance_name\": \"Updated AWS Instance\",\n    \"cloud_provider\": \"AWS\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"environment\",\n        \"value\": \"staging\"\n      }\n    ],\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": true\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": true,\n      \"data_security_posture_management\": true,\n      \"registry_scanning\": true,\n      \"registry_scanning_options\": {\n        \"type\": \"ECR\"\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"account_ids\": [\n          \"123456789012\",\n          \"210987654321\"\n        ]\n      },\n      \"regions\": {\n        \"enabled\": true,\n        \"type\": \"EXCLUDE\",\n        \"regions\": [\n          \"us-east-1\"\n        ]\n      }\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/edit_instance",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"edit_instance"
+									]
+								},
+								"description": "Edit the configuration settings of the specified integration instance template. The template must be applied in the CSP after editing.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Enable or disable cloud integration instance",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"e22b3a29260c404183d1a0ea6cbd4418\",\n      \"d32d3b19730d414387d2a3ea7eac4218\"\n    ],\n    \"enable\": true\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/enable_disable_instance",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"enable_disable_instance"
+									]
+								},
+								"description": "Enable or disable the cloud integration instances specified by instance ID. To obtain the instance ID, use /public_api/v1/cloud_onboarding/get_instances/.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get integration instance details",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance-1\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/get_instance_details",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"get_instance_details"
+									]
+								},
+								"description": "Get the configuration details of the specified integration instance.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all or filtered integration instances",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"STATUS\",\n          \"ORDER\": \"DESC\"\n        }\n      ],\n      \"paging\": {\n        \"from\": 0,\n        \"to\": 50\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"CLOUD_PROVIDER\",\n            \"SEARCH_TYPE\": \"EQ\",\n            \"SEARCH_VALUE\": \"AWS\"\n          }\n        ]\n      }\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/get_instances",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"get_instances"
+									]
+								},
+								"description": "Get the configuration details of all or filtered integration instances. This does not include instances in _pending_ state.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing cloud integration instances"
+				},
+				{
+					"name": "Outposts",
+					"item": [
+						{
+							"name": "Create an outpost template",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"AWS\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"purpose\",\n        \"value\": \"outpost\"\n      }\n    ]\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/create_outpost_template",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"create_outpost_template"
+									]
+								},
+								"description": "Create a template to onboard an outpost. Define the custom resource tags you want associated with the outpost and Cortex generates an authentication template to establish trust to the CSP and grant permissions to Cortex.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Edit an outpost template",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"reply\": {\n    \"automated\": {},\n    \"manual\": {\n      \"TF\": \"https://qa2-test-9999219916297-cloud-onboarding-templates.storage.googleapis.com/outposts/aws/tf-12711a531d51412d930a647ed2fdacdf-1743447640.tar.gz?Expires=1744052440&GoogleAccessId=api-pod%40qa2-test-9999219916297.iam.gserviceaccount.com&Signature=&response-content-disposition=attachment%3Bfilename%3Doutposts_aws_tf-12711a531d51412d930a647ed2fdacdf-1743447640.tar.gz\"\n    }\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/v1/cloud_onboarding/edit_outpost",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"v1",
+										"cloud_onboarding",
+										"edit_outpost"
+									]
+								},
+								"description": "Edit the custom resource tags of the specified outpost template. The template must be applied in the CSP after editing.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing outposts"
+				}
+			],
+			"description": "Public APIs for cloud onboarding and instance management."
+		},
+		{
+			"name": "Application Security public APIs",
+			"item": [
+				{
+					"name": "Integrations",
+					"item": [
+						{
+							"name": "Delete an AppSec integration",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/integrations/:id",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"integrations",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "ID of the integration to delete"
+										}
+									]
+								},
+								"description": "Delete the specified Application Security integration.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get an AppSec integration",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/integrations/:id",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"integrations",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "ID of the integration"
+										}
+									]
+								},
+								"description": "Get the details of the Application Security integration specified by its ID.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Get AppSec integrations",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/integrations?type=&type_category=",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"integrations"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "",
+											"description": "Integration type (e.g., AWS_CODE_BUILD, GITHUB)"
+										},
+										{
+											"key": "type_category",
+											"value": "",
+											"description": "Integration category (e.g., DEFAULT, CI_CD)"
+										}
+									]
+								},
+								"description": "Application Security capabilities support a wide range of Cloud DevSecOps systems integrations.\n\nGet details on the Application Security integrations in your Cortex environment. You can filter the type and category of integrations you want to list.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						},
+						{
+							"name": "Update an AppSec integration",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"externalProjects\": [\n    {\n      \"externalBranchName\": \"externalBranchName\",\n      \"repoId\": \"repoId\",\n      \"externalProjectId\": \"externalProjectId\",\n      \"branchName\": \"branchName\",\n      \"externalId\": \"externalId\"\n    },\n    {\n      \"externalBranchName\": \"externalBranchName\",\n      \"repoId\": \"repoId\",\n      \"externalProjectId\": \"externalProjectId\",\n      \"branchName\": \"branchName\",\n      \"externalId\": \"externalId\"\n    }\n  ],\n  \"state\": [\n    \"state\",\n    \"state\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/integrations/:id",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"integrations",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "ID of the integration to update"
+										}
+									]
+								},
+								"description": "Update some of the Application Security integration details.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing integrations"
+				},
+				{
+					"name": "Labels",
+					"item": [
+						{
+							"name": "Get AppSec rule labels",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/rules/rule_labels",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"rules",
+										"rule_labels"
+									]
+								},
+								"description": "Get a list of all of the Application Security rule labels.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing rule labels"
+				},
+				{
+					"name": "Policies",
+					"item": [
+						{
+							"name": "Create an AppSec policy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{X_API_KEY}}",
+										"type": "text"
+									},
+									{
+										"key": "x-xdr-auth-id",
+										"value": "{{X_XDR_AUTH_ID}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"scanTypes\": {\n    \"CAS_LICENSE_SCANNER\": true,\n    \"CAS_OPERATIONAL_RISK_SCANNER\": true,\n    \"CAS_THIRD_PARTY_WEAKNESSES\": true,\n    \"CAS_CI_CD_RISK_SCANNER\": true,\n    \"CAS_SECRET_SCANNER\": true,\n    \"CAS_CVE_SCANNER\": true,\n    \"CAS_IAC_SCANNER\": true\n  },\n  \"developerSuppressionAffects\": true,\n  \"scope\": {\n    \"OR\": [\n      null,\n      null\n    ],\n    \"SEARCH_FIELD\": \"SEARCH_FIELD\",\n    \"AND\": [\n      null,\n      null\n    ],\n    \"SEARCH_VALUE\": true\n  },\n  \"name\": \"name\",\n  \"description\": \"description\",\n  \"triggers\": {\n    \"pr\": true,\n    \"periodic\": true,\n    \"cicd\": true\n  },\n  \"conditions\": {\n    \"OR\": [\n      null,\n      null\n    ],\n    \"SEARCH_FIELD\": \"SEARCH_FIELD\",\n    \"AND\": [\n      null,\n      null\n    ],\n    \"SEARCH_VALUE\": true\n  },\n  \"actions\": {\n    \"reportIssue\": true,\n    \"blockPr\": true,\n    \"blockCicd\": true,\n    \"reportPrComment\": true,\n    \"reportCicd\": true\n  },\n  \"enabled\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://{{api-endpoint}}/public_api/appsec/v1/policies",
+									"protocol": "https",
+									"host": [
+										"{{api-endpoint}}"
+									],
+									"path": [
+										"public_api",
+										"appsec",
+										"v1",
+										"policies"
+									]
+								},
+								"description": "An Application Security policy defines how a system should respond to application security threats. It includes conditions that trigger the policy, the scope of its application, and the actions to be taken when these conditions are met. When a policy detects a threat, it generates an issue for remediation.\n\nCreate an Application Security policy.\n\nRequired license: Cortex Cloud Runtime Security or Cortex Cloud Posture Management"
+							},
+							"response": []
+						}
+					],
+					"description": "APIs for managing policies"
+				}
+			],
+			"description": "Enhance your security operations and automation capabilities using the Application Security APIs to optimize the management of data sources, rules, policies, and scans."
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{X_API_KEY}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "x-api-key",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "api-endpoint",
+			"value": "your-api-fqdn-here",
+			"type": "string"
+		},
+		{
+			"key": "X_API_KEY",
+			"value": "YOUR_X_API_KEY",
+			"type": "string"
+		},
+		{
+			"key": "X_XDR_AUTH_ID",
+			"value": "YOUR_X_XDR_AUTH_ID",
+			"type": "string"
+		},
+		{
+			"key": "XSIAM_API_KEY",
+			"value": "YOUR_XSIAM_API_KEY_OR_AUTHORIZATION_HEADER_VALUE",
+			"type": "string"
+		}
+	]
+}
