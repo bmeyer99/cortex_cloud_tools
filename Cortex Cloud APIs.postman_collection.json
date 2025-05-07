@@ -20,7 +20,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -42,7 +42,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"account-1\",\n      \"account-2\"\n    ],\n    \"instance_id\": \"instance-1\",\n    \"enable\": true\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": {{cloud_account_ids_array}},\n    \"instance_id\": \"{{instance_id}}\",\n    \"enable\": {{enable_accounts_flag}}\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -72,7 +72,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -94,7 +94,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance_id\",\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"STATUS\",\n          \"ORDER\": \"DESC\"\n        }\n      ],\n      \"paging\": {\n        \"from\": 0,\n        \"to\": 50\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"STATUS\",\n            \"SEARCH_TYPE\": \"EQ\",\n            \"SEARCH_VALUE\": \"ACTIVE\"\n          }\n        ]\n      }\n    }\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"{{instance_id}}\",\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"{{get_accounts_sort_field}}\",\n          \"ORDER\": \"{{get_accounts_sort_order}}\"\n        }\n      ],\n      \"paging\": {\n        \"from\": {{get_accounts_paging_from}},\n        \"to\": {{get_accounts_paging_to}}\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"{{get_accounts_filter_field}}\",\n            \"SEARCH_TYPE\": \"{{get_accounts_filter_type}}\",\n            \"SEARCH_VALUE\": \"{{get_accounts_filter_value}}\"\n          }\n        ]\n      }\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -124,7 +124,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -167,7 +167,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -189,7 +189,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"AWS\"\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"{{cloud_provider}}\"\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -225,7 +225,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -247,7 +247,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"scope\": \"ORGANIZATION\",\n    \"scan_mode\": \"MANAGED\",\n    \"cloud_provider\": \"AWS\",\n    \"instance_name\": \"My AWS Instance\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"environment\",\n        \"value\": \"production\"\n      }\n    ],\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": true\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"account_ids\": [\n          \"123456789012\"\n        ]\n      },\n      \"regions\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"regions\": [\n          \"us-east-1\",\n          \"us-west-2\"\n        ]\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": true,\n      \"data_security_posture_management\": true,\n      \"registry_scanning\": true,\n      \"registry_scanning_options\": {\n        \"type\": \"ECR\"\n      }\n    }\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"scope\": \"{{scope_type}}\",\n    \"scan_mode\": \"{{scan_mode_type}}\",\n    \"cloud_provider\": \"{{cloud_provider}}\",\n    \"instance_name\": \"{{new_instance_name}}\",\n    \"custom_resources_tags\": {{custom_resources_tags_array}},\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": {{audit_logs_enabled}}\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": {{accounts_scope_enabled}},\n        \"type\": \"{{accounts_scope_type}}\",\n        \"account_ids\": {{scope_account_ids_array}}\n      },\n      \"regions\": {\n        \"enabled\": {{regions_scope_enabled}},\n        \"type\": \"{{regions_scope_type}}\",\n        \"regions\": {{scope_regions_array}}\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": {{xsiam_analytics_enabled}},\n      \"data_security_posture_management\": {{dspm_enabled}},\n      \"registry_scanning\": {{registry_scanning_enabled}},\n      \"registry_scanning_options\": {\n        \"type\": \"{{registry_scan_type}}\"\n      }\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -277,7 +277,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -299,7 +299,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"instance-1\",\n      \"instance-2\"\n    ]\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": {{instance_ids_to_delete_array}}\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -329,7 +329,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -351,7 +351,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance-1\",\n    \"scan_env_id\": \"env-1\",\n    \"instance_name\": \"Updated AWS Instance\",\n    \"cloud_provider\": \"AWS\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"environment\",\n        \"value\": \"staging\"\n      }\n    ],\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": true\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": true,\n      \"data_security_posture_management\": true,\n      \"registry_scanning\": true,\n      \"registry_scanning_options\": {\n        \"type\": \"ECR\"\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": true,\n        \"type\": \"INCLUDE\",\n        \"account_ids\": [\n          \"123456789012\",\n          \"210987654321\"\n        ]\n      },\n      \"regions\": {\n        \"enabled\": true,\n        \"type\": \"EXCLUDE\",\n        \"regions\": [\n          \"us-east-1\"\n        ]\n      }\n    }\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"{{instance_id}}\",\n    \"scan_env_id\": \"{{scan_env_id}}\",\n    \"instance_name\": \"{{updated_instance_name}}\",\n    \"cloud_provider\": \"{{cloud_provider}}\",\n    \"custom_resources_tags\": {{custom_resources_tags_array}},\n    \"collection_configuration\": {\n      \"audit_logs\": {\n        \"enabled\": {{audit_logs_enabled}}\n      }\n    },\n    \"additional_capabilities\": {\n      \"xsiam_analytics\": {{xsiam_analytics_enabled}},\n      \"data_security_posture_management\": {{dspm_enabled}},\n      \"registry_scanning\": {{registry_scanning_enabled}},\n      \"registry_scanning_options\": {\n        \"type\": \"{{registry_scan_type}}\"\n      }\n    },\n    \"scope_modifications\": {\n      \"accounts\": {\n        \"enabled\": {{accounts_scope_enabled}},\n        \"type\": \"{{accounts_scope_type}}\",\n        \"account_ids\": {{scope_account_ids_array}}\n      },\n      \"regions\": {\n        \"enabled\": {{regions_scope_enabled}},\n        \"type\": \"{{regions_scope_type}}\",\n        \"regions\": {{scope_regions_array}}\n      }\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -381,7 +381,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -403,7 +403,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"ids\": [\n      \"e22b3a29260c404183d1a0ea6cbd4418\",\n      \"d32d3b19730d414387d2a3ea7eac4218\"\n    ],\n    \"enable\": true\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"ids\": {{instance_ids_to_toggle_array}},\n    \"enable\": {{enable_instance_flag}}\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -433,7 +433,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -455,7 +455,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"instance-1\"\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"instance_id\": \"{{instance_id}}\"\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -485,7 +485,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -507,7 +507,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"STATUS\",\n          \"ORDER\": \"DESC\"\n        }\n      ],\n      \"paging\": {\n        \"from\": 0,\n        \"to\": 50\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"CLOUD_PROVIDER\",\n            \"SEARCH_TYPE\": \"EQ\",\n            \"SEARCH_VALUE\": \"AWS\"\n          }\n        ]\n      }\n    }\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"filter_data\": {\n      \"sort\": [\n        {\n          \"FIELD\": \"{{get_instances_sort_field}}\",\n          \"ORDER\": \"{{get_instances_sort_order}}\"\n        }\n      ],\n      \"paging\": {\n        \"from\": {{get_instances_paging_from}},\n        \"to\": {{get_instances_paging_to}}\n      },\n      \"filter\": {\n        \"AND\": [\n          {\n            \"SEARCH_FIELD\": \"{{get_instances_filter_field_csp}}\",\n            \"SEARCH_TYPE\": \"{{get_instances_filter_type_csp}}\",\n            \"SEARCH_VALUE\": \"{{get_instances_filter_value_csp}}\"\n          }\n        ]\n      }\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -543,7 +543,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -565,7 +565,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"AWS\",\n    \"custom_resources_tags\": [\n      {\n        \"key\": \"purpose\",\n        \"value\": \"outpost\"\n      }\n    ]\n  }\n}",
+									"raw": "{\n  \"request_data\": {\n    \"cloud_provider\": \"{{cloud_provider}}\",\n    \"custom_resources_tags\": {{custom_resources_tags_array}}\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -595,7 +595,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -617,7 +617,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"reply\": {\n    \"automated\": {},\n    \"manual\": {\n      \"TF\": \"https://qa2-test-9999219916297-cloud-onboarding-templates.storage.googleapis.com/outposts/aws/tf-12711a531d51412d930a647ed2fdacdf-1743447640.tar.gz?Expires=1744052440&GoogleAccessId=api-pod%40qa2-test-9999219916297.iam.gserviceaccount.com&Signature=&response-content-disposition=attachment%3Bfilename%3Doutposts_aws_tf-12711a531d51412d930a647ed2fdacdf-1743447640.tar.gz\"\n    }\n  }\n}",
+									"raw": "{\n  \"reply\": {\n    \"automated\": {},\n    \"manual\": {\n      \"TF\": \"{{outpost_tf_download_url}}\"\n    }\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -659,7 +659,7 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -710,7 +710,7 @@
 								"method": "GET",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -761,7 +761,7 @@
 								"method": "GET",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -816,7 +816,7 @@
 								"method": "PUT",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -838,7 +838,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"externalProjects\": [\n    {\n      \"externalBranchName\": \"externalBranchName\",\n      \"repoId\": \"repoId\",\n      \"externalProjectId\": \"externalProjectId\",\n      \"branchName\": \"branchName\",\n      \"externalId\": \"externalId\"\n    },\n    {\n      \"externalBranchName\": \"externalBranchName\",\n      \"repoId\": \"repoId\",\n      \"externalProjectId\": \"externalProjectId\",\n      \"branchName\": \"branchName\",\n      \"externalId\": \"externalId\"\n    }\n  ],\n  \"state\": [\n    \"state\",\n    \"state\"\n  ]\n}",
+									"raw": "{\n  \"externalProjects\": {{external_projects_array}},\n  \"state\": {{integration_states_array}}\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -882,7 +882,7 @@
 								"method": "GET",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -932,7 +932,7 @@
 								"method": "POST",
 								"header": [
 									{
-										"key": "x-api-key",
+										"key": "Authorization",
 										"value": "{{X_API_KEY}}",
 										"type": "text"
 									},
@@ -954,7 +954,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"scanTypes\": {\n    \"CAS_LICENSE_SCANNER\": true,\n    \"CAS_OPERATIONAL_RISK_SCANNER\": true,\n    \"CAS_THIRD_PARTY_WEAKNESSES\": true,\n    \"CAS_CI_CD_RISK_SCANNER\": true,\n    \"CAS_SECRET_SCANNER\": true,\n    \"CAS_CVE_SCANNER\": true,\n    \"CAS_IAC_SCANNER\": true\n  },\n  \"developerSuppressionAffects\": true,\n  \"scope\": {\n    \"OR\": [\n      null,\n      null\n    ],\n    \"SEARCH_FIELD\": \"SEARCH_FIELD\",\n    \"AND\": [\n      null,\n      null\n    ],\n    \"SEARCH_VALUE\": true\n  },\n  \"name\": \"name\",\n  \"description\": \"description\",\n  \"triggers\": {\n    \"pr\": true,\n    \"periodic\": true,\n    \"cicd\": true\n  },\n  \"conditions\": {\n    \"OR\": [\n      null,\n      null\n    ],\n    \"SEARCH_FIELD\": \"SEARCH_FIELD\",\n    \"AND\": [\n      null,\n      null\n    ],\n    \"SEARCH_VALUE\": true\n  },\n  \"actions\": {\n    \"reportIssue\": true,\n    \"blockPr\": true,\n    \"blockCicd\": true,\n    \"reportPrComment\": true,\n    \"reportCicd\": true\n  },\n  \"enabled\": true\n}",
+									"raw": "{\n  \"scanTypes\": {\n    \"CAS_LICENSE_SCANNER\": {{scan_cas_license_enabled}},\n    \"CAS_OPERATIONAL_RISK_SCANNER\": {{scan_cas_operational_risk_enabled}},\n    \"CAS_THIRD_PARTY_WEAKNESSES\": {{scan_cas_third_party_weaknesses_enabled}},\n    \"CAS_CI_CD_RISK_SCANNER\": {{scan_cas_ci_cd_risk_enabled}},\n    \"CAS_SECRET_SCANNER\": {{scan_cas_secret_enabled}},\n    \"CAS_CVE_SCANNER\": {{scan_cas_cve_enabled}},\n    \"CAS_IAC_SCANNER\": {{scan_cas_iac_enabled}}\n  },\n  \"developerSuppressionAffects\": {{dev_suppression_affects}},\n  \"scope\": {{policy_scope_object}},\n  \"name\": \"{{policy_name}}\",\n  \"description\": \"{{policy_description}}\",\n  \"triggers\": {\n    \"pr\": {{trigger_pr_enabled}},\n    \"periodic\": {{trigger_periodic_enabled}},\n    \"cicd\": {{trigger_cicd_enabled}}\n  },\n  \"conditions\": {{policy_conditions_object}},\n  \"actions\": {\n    \"reportIssue\": {{action_report_issue_enabled}},\n    \"blockPr\": {{action_block_pr_enabled}},\n    \"blockCicd\": {{action_block_cicd_enabled}},\n    \"reportPrComment\": {{action_report_pr_comment_enabled}},\n    \"reportCicd\": {{action_report_cicd_enabled}}\n  },\n  \"enabled\": {{policy_enabled}}\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -985,46 +985,402 @@
 			"description": "Enhance your security operations and automation capabilities using the Application Security APIs to optimize the management of data sources, rules, policies, and scans."
 		}
 	],
-	"auth": {
-		"type": "apikey",
-		"apikey": [
-			{
-				"key": "value",
-				"value": "{{X_API_KEY}}",
-				"type": "string"
-			},
-			{
-				"key": "key",
-				"value": "x-api-key",
-				"type": "string"
-			},
-			{
-				"key": "in",
-				"value": "header",
-				"type": "string"
-			}
-		]
-	},
 	"variable": [
+		{
+			"key": "instance_id",
+			"value": "YOUR_INSTANCE_ID",
+			"type": "string",
+			"description": "The specific instance ID to target for many operations."
+		},
 		{
 			"key": "api-endpoint",
 			"value": "your-api-fqdn-here",
-			"type": "string"
+			"type": "string",
+			"description": "The FQDN of your Cortex API endpoint."
 		},
 		{
 			"key": "X_API_KEY",
 			"value": "YOUR_X_API_KEY",
-			"type": "string"
+			"type": "string",
+			"description": "Your Cortex API Key value."
 		},
 		{
 			"key": "X_XDR_AUTH_ID",
 			"value": "YOUR_X_XDR_AUTH_ID",
-			"type": "string"
+			"type": "string",
+			"description": "Your Cortex API Key ID."
 		},
 		{
 			"key": "XSIAM_API_KEY",
 			"value": "YOUR_XSIAM_API_KEY_OR_AUTHORIZATION_HEADER_VALUE",
-			"type": "string"
+			"type": "string",
+			"description": "Your XSIAM API Key or Authorization header value (used for XSIAM specific APIs)."
+		},
+		{
+			"key": "cloud_account_ids_array",
+			"value": "[\"account-1\", \"account-2\"]",
+			"type": "string",
+			"description": "JSON array of cloud account IDs (e.g., for enabling/disabling)."
+		},
+		{
+			"key": "enable_accounts_flag",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable (true) or disable (false) cloud accounts."
+		},
+		{
+			"key": "get_accounts_sort_field",
+			"value": "STATUS",
+			"type": "string",
+			"description": "Field to sort by when getting accounts (e.g., STATUS, NAME)."
+		},
+		{
+			"key": "get_accounts_sort_order",
+			"value": "DESC",
+			"type": "string",
+			"description": "Sort order (ASC or DESC) when getting accounts."
+		},
+		{
+			"key": "get_accounts_paging_from",
+			"value": "0",
+			"type": "string",
+			"description": "Starting index for pagination when getting accounts."
+		},
+		{
+			"key": "get_accounts_paging_to",
+			"value": "50",
+			"type": "string",
+			"description": "Ending index for pagination when getting accounts."
+		},
+		{
+			"key": "get_accounts_filter_field",
+			"value": "STATUS",
+			"type": "string",
+			"description": "Field to filter on when getting accounts (e.g., STATUS)."
+		},
+		{
+			"key": "get_accounts_filter_type",
+			"value": "EQ",
+			"type": "string",
+			"description": "Filter type (e.g., EQ, NEQ) when getting accounts."
+		},
+		{
+			"key": "get_accounts_filter_value",
+			"value": "ACTIVE",
+			"type": "string",
+			"description": "Value to filter by when getting accounts."
+		},
+		{
+			"key": "cloud_provider",
+			"value": "AWS",
+			"type": "string",
+			"description": "Cloud Service Provider (e.g., AWS, AZURE, GCP)."
+		},
+		{
+			"key": "scope_type",
+			"value": "ORGANIZATION",
+			"type": "string",
+			"description": "Scope for instance creation (e.g., ORGANIZATION, ACCOUNT)."
+		},
+		{
+			"key": "scan_mode_type",
+			"value": "MANAGED",
+			"type": "string",
+			"description": "Scan mode for instance creation (e.g., MANAGED, SELF_HOSTED)."
+		},
+		{
+			"key": "new_instance_name",
+			"value": "My New Instance",
+			"type": "string",
+			"description": "Name for the new cloud onboarding instance."
+		},
+		{
+			"key": "custom_resources_tags_array",
+			"value": "[{\"key\": \"environment\", \"value\": \"production\"}]",
+			"type": "string",
+			"description": "JSON array of key-value pairs for custom resource tags."
+		},
+		{
+			"key": "audit_logs_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable audit log collection."
+		},
+		{
+			"key": "accounts_scope_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable account scope modifications."
+		},
+		{
+			"key": "accounts_scope_type",
+			"value": "INCLUDE",
+			"type": "string",
+			"description": "Type of account scope modification (INCLUDE or EXCLUDE)."
+		},
+		{
+			"key": "scope_account_ids_array",
+			"value": "[\"123456789012\"]",
+			"type": "string",
+			"description": "JSON array of account IDs for scope modification."
+		},
+		{
+			"key": "regions_scope_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable region scope modifications."
+		},
+		{
+			"key": "regions_scope_type",
+			"value": "INCLUDE",
+			"type": "string",
+			"description": "Type of region scope modification (INCLUDE or EXCLUDE)."
+		},
+		{
+			"key": "scope_regions_array",
+			"value": "[\"us-east-1\", \"us-west-2\"]",
+			"type": "string",
+			"description": "JSON array of regions for scope modification."
+		},
+		{
+			"key": "xsiam_analytics_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable XSIAM analytics capability."
+		},
+		{
+			"key": "dspm_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable Data Security Posture Management capability."
+		},
+		{
+			"key": "registry_scanning_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable registry scanning capability."
+		},
+		{
+			"key": "registry_scan_type",
+			"value": "ECR",
+			"type": "string",
+			"description": "Type of registry scanning (e.g., ECR, ACR, GAR)."
+		},
+		{
+			"key": "instance_ids_to_delete_array",
+			"value": "[\"instance-1\", \"instance-2\"]",
+			"type": "string",
+			"description": "JSON array of instance IDs to delete."
+		},
+		{
+			"key": "scan_env_id",
+			"value": "YOUR_SCAN_ENV_ID",
+			"type": "string",
+			"description": "Scan environment ID for editing an instance."
+		},
+		{
+			"key": "updated_instance_name",
+			"value": "My Updated Instance",
+			"type": "string",
+			"description": "New name when editing an instance."
+		},
+		{
+			"key": "instance_ids_to_toggle_array",
+			"value": "[\"e22b3a29260c404183d1a0ea6cbd4418\", \"d32d3b19730d414387d2a3ea7eac4218\"]",
+			"type": "string",
+			"description": "JSON array of instance IDs to enable or disable."
+		},
+		{
+			"key": "enable_instance_flag",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable (true) or disable (false) instances."
+		},
+		{
+			"key": "get_instances_sort_field",
+			"value": "STATUS",
+			"type": "string",
+			"description": "Field to sort by when getting instances (e.g., STATUS, NAME)."
+		},
+		{
+			"key": "get_instances_sort_order",
+			"value": "DESC",
+			"type": "string",
+			"description": "Sort order (ASC or DESC) when getting instances."
+		},
+		{
+			"key": "get_instances_paging_from",
+			"value": "0",
+			"type": "string",
+			"description": "Starting index for pagination when getting instances."
+		},
+		{
+			"key": "get_instances_paging_to",
+			"value": "50",
+			"type": "string",
+			"description": "Ending index for pagination when getting instances."
+		},
+		{
+			"key": "get_instances_filter_field_csp",
+			"value": "CLOUD_PROVIDER",
+			"type": "string",
+			"description": "Field to filter on when getting instances (e.g., CLOUD_PROVIDER)."
+		},
+		{
+			"key": "get_instances_filter_type_csp",
+			"value": "EQ",
+			"type": "string",
+			"description": "Filter type (e.g., EQ, NEQ) when getting instances."
+		},
+		{
+			"key": "get_instances_filter_value_csp",
+			"value": "AWS",
+			"type": "string",
+			"description": "Value to filter by when getting instances (e.g., AWS)."
+		},
+		{
+			"key": "outpost_tf_download_url",
+			"value": "YOUR_OUTPOST_TF_DOWNLOAD_URL",
+			"type": "string",
+			"description": "URL for downloading the Terraform template for an outpost."
+		},
+		{
+			"key": "external_projects_array",
+			"value": "[{\"externalBranchName\": \"main\", \"repoId\": \"repo1\", \"externalProjectId\": \"proj1\", \"branchName\": \"develop\", \"externalId\": \"ext1\"}]",
+			"type": "string",
+			"description": "JSON array of external project details for AppSec integration updates."
+		},
+		{
+			"key": "integration_states_array",
+			"value": "[\"active\", \"pending\"]",
+			"type": "string",
+			"description": "JSON array of states for AppSec integration updates."
+		},
+		{
+			"key": "scan_cas_license_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS License Scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_operational_risk_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS Operational Risk Scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_third_party_weaknesses_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS Third Party Weaknesses scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_ci_cd_risk_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS CI/CD Risk Scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_secret_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS Secret Scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_cve_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS CVE Scanner for AppSec policy."
+		},
+		{
+			"key": "scan_cas_iac_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CAS IaC Scanner for AppSec policy."
+		},
+		{
+			"key": "dev_suppression_affects",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag indicating if developer suppression affects the AppSec policy."
+		},
+		{
+			"key": "policy_scope_object",
+			"value": "{\"SEARCH_FIELD\": \"TAG_KEY\", \"SEARCH_TYPE\": \"EQ\", \"SEARCH_VALUE\": \"environment\"}",
+			"type": "string",
+			"description": "JSON object defining the scope for the AppSec policy."
+		},
+		{
+			"key": "policy_name",
+			"value": "My AppSec Policy",
+			"type": "string",
+			"description": "Name for the AppSec policy."
+		},
+		{
+			"key": "policy_description",
+			"value": "Default AppSec policy",
+			"type": "string",
+			"description": "Description for the AppSec policy."
+		},
+		{
+			"key": "trigger_pr_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable PR trigger for AppSec policy."
+		},
+		{
+			"key": "trigger_periodic_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable periodic trigger for AppSec policy."
+		},
+		{
+			"key": "trigger_cicd_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable CI/CD trigger for AppSec policy."
+		},
+		{
+			"key": "policy_conditions_object",
+			"value": "{\"SEARCH_FIELD\": \"Severity\", \"SEARCH_TYPE\": \"EQ\", \"SEARCH_VALUE\": \"CRITICAL\"}",
+			"type": "string",
+			"description": "JSON object defining the conditions for the AppSec policy."
+		},
+		{
+			"key": "action_report_issue_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable 'reportIssue' action for AppSec policy."
+		},
+		{
+			"key": "action_block_pr_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable 'blockPr' action for AppSec policy."
+		},
+		{
+			"key": "action_block_cicd_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable 'blockCicd' action for AppSec policy."
+		},
+		{
+			"key": "action_report_pr_comment_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable 'reportPrComment' action for AppSec policy."
+		},
+		{
+			"key": "action_report_cicd_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable 'reportCicd' action for AppSec policy."
+		},
+		{
+			"key": "policy_enabled",
+			"value": "true",
+			"type": "boolean",
+			"description": "Flag to enable or disable the AppSec policy."
 		}
 	]
 }
